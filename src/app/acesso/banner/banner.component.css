@@ -1,10 +1,26 @@
 img {
     position: absolute
 }
-.banner-background {
-    background-image: url("/assets/banner-acesso/fundo.png");
-    height: 602px;
-    width: 379px;
-    padding-top: 91px;
-    padding-left: 116px;
+
+@media (max-width: 767.98px) {
+
 }
+
+@media (max-width: 575.98px) {
+
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+}
+
+@media (min-width: 768px) {
+    .banner-background {
+        background-image: url("/assets/banner-acesso/fundo.png");
+        height: 602px;
+        width: 379px;
+        padding-top: 91px;
+        padding-left: 116px;
+    }
+}
+
