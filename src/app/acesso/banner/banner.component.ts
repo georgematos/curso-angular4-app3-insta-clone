@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Imagem } from './imagem.model';
 
 @Component({
   selector: 'app-banner',
@@ -19,15 +20,34 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class BannerComponent implements OnInit {
 
-  public stateOfImage: string = 'visible';
+  public imagens: Imagem[] = [
+    { state: 'hidden', url: '/assets/banner-acesso/img_1.png' },
+    { state: 'hidden', url: '/assets/banner-acesso/img_2.png' },
+    { state: 'hidden', url: '/assets/banner-acesso/img_3.png' },
+    { state: 'hidden', url: '/assets/banner-acesso/img_4.png' },
+    { state: 'hidden', url: '/assets/banner-acesso/img_5.png' }
+  ];
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  private index: number = 0;
 
-  public toggleState(): void {
-    this.stateOfImage = this.stateOfImage === 'hidden' ? 'visible' : 'hidden';
+  ngOnInit(): void {
+    this.animateBanner();
+  }
+  
+  animateBanner(): void {
+    setTimeout(() => {
+      this.imagens[this.index].state = 'hidden';
+      this.index--;
+      if(this.index < 0) {
+        this.imagens.forEach(img => {
+          img.state = 'visible';
+        })
+        this.index = 4;
+      }
+      this.animateBanner();
+    }, 4000);
   }
 
 }
