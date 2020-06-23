@@ -21,32 +21,30 @@ import { Imagem } from './imagem.model';
 export class BannerComponent implements OnInit {
 
   public imagens: Imagem[] = [
-    { state: 'hidden', url: '/assets/banner-acesso/img_1.png' },
-    { state: 'hidden', url: '/assets/banner-acesso/img_2.png' },
-    { state: 'hidden', url: '/assets/banner-acesso/img_3.png' },
-    { state: 'hidden', url: '/assets/banner-acesso/img_4.png' },
-    { state: 'hidden', url: '/assets/banner-acesso/img_5.png' }
+    { state: 'visible', url: '/assets/banner-acesso/img_1.png' },
+    { state: 'visible', url: '/assets/banner-acesso/img_2.png' },
+    { state: 'visible', url: '/assets/banner-acesso/img_3.png' },
+    { state: 'visible', url: '/assets/banner-acesso/img_4.png' },
+    { state: 'visible', url: '/assets/banner-acesso/img_5.png' }
   ];
 
   constructor() { }
 
-  private index: number = 0;
-
   ngOnInit(): void {
-    this.animateBanner();
+    this.animateBanner(4);
   }
   
-  animateBanner(): void {
+  animateBanner(index: number): void {
     setTimeout(() => {
-      this.imagens[this.index].state = 'hidden';
-      this.index--;
-      if(this.index < 0) {
+      this.imagens[index].state = 'hidden';
+      index--;
+      if(index < 0) {
         this.imagens.forEach(img => {
           img.state = 'visible';
         })
-        this.index = 4;
+        index = 4;
       }
-      this.animateBanner();
+      this.animateBanner(index);
     }, 4000);
   }
 
