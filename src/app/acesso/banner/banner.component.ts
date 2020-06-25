@@ -21,11 +21,11 @@ import { Imagem } from './imagem.model';
 export class BannerComponent implements OnInit {
 
   public imagens: Imagem[] = [
-    { state: 'visible', url: '/assets/banner-acesso/img_1.png' },
-    { state: 'visible', url: '/assets/banner-acesso/img_2.png' },
-    { state: 'visible', url: '/assets/banner-acesso/img_3.png' },
+    { state: 'visible', url: '/assets/banner-acesso/img_5.png' },
     { state: 'visible', url: '/assets/banner-acesso/img_4.png' },
-    { state: 'visible', url: '/assets/banner-acesso/img_5.png' }
+    { state: 'visible', url: '/assets/banner-acesso/img_3.png' },
+    { state: 'visible', url: '/assets/banner-acesso/img_2.png' },
+    { state: 'visible', url: '/assets/banner-acesso/img_1.png' },
   ];
 
   constructor() { }

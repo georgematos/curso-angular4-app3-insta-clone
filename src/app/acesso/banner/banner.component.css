@@ -3,7 +3,9 @@ img {
 }
 
 @media (max-width: 767.98px) {
-
+    .banner-background {
+        display: none;
+    }
 }
 
 @media (max-width: 575.98px) {
