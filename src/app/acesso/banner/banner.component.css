@@ -5,15 +5,19 @@ img {
 @media (max-width: 767.98px) {
     .banner-background {
         display: none;
+        padding-left: 116px;
     }
 }
 
 @media (max-width: 575.98px) {
-
+    .banner-background {
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
-
+    .banner-background {
+        padding-left: 116px;
+    }
 }
 
 @media (min-width: 768px) {
