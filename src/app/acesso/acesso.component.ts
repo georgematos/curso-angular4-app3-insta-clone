@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-acesso',
@@ -36,6 +36,12 @@ export class AcessoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public exibirPainel(event: string): void {
+    if(event === 'cadastro') {
+      this.cadastro = false;
+    }
   }
 
 }
