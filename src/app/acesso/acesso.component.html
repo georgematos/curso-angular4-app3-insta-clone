@@ -11,7 +11,7 @@
 
     <ng-template #formLogin>
       <div class="col-md-6 d-flex justify-content-center justify-content-md-center justify-content-lg-start justify-content-xg-start" [@animacao-painel]="estadoPainel">
-        <app-login></app-login>
+        <app-login (exibirPainel)="exibirPainel($event)"></app-login>
       </div>
     </ng-template>
   </div>
