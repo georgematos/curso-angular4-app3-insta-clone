@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   public exibirPainelDeLogin(): void {
-    this.exibirPainel.emit('login');
+    this.exibirPainel.emit('cadastro');
   }
 
 }
