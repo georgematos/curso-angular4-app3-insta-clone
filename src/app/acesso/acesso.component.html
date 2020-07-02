@@ -8,7 +8,9 @@
     <div *ngIf="cadastro; else formLogin">
       <div
         class="col-md-6 d-flex justify-content-center justify-content-md-center justify-content-lg-start justify-content-xg-start"
-        [@animacao-painel]="estadoPainel">
+        [@animacao-painel]="estadoPainel"
+        (@animacao-painel.start)="inicioDaAnimacao()"
+        (@animacao-painel.done)="fimDaAnimacao()">
         <app-cadastro (exibirPainel)="exibirPainel($event)"></app-cadastro>
       </div>
     </div>
