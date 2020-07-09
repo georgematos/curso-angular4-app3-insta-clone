@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AcessoComponent } from './acesso/acesso.component';
 import { AppComponent } from './app.component';
@@ -20,7 +21,8 @@ import { LoginComponent } from './acesso/login/login.component';
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
