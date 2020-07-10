@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Usuario } from '../../model/usuario.model';
 
 @Component({
   selector: 'app-cadastro',
@@ -23,6 +24,7 @@ export class CadastroComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.formValidationInit();
   }
 
   public exibirPainelDeLogin(): void {
@@ -30,6 +32,16 @@ export class CadastroComponent implements OnInit {
   }
 
   public cadastrarUsuario(): void {
+    let usuario: Usuario = new Usuario(
+      this.formulario.value.nome_usuario,
+      this.formulario.value.nome_completo,
+      this.formulario.value.email,
+      this.formulario.value.senha
+    );
+    console.log(usuario);
+  }
+
+  private formValidationInit(): void {
     this.formulario = this.fb.group({
       nome_usuario: ['', Validators.compose([
         Validators.required,
@@ -49,7 +61,5 @@ export class CadastroComponent implements OnInit {
         Validators.required,
       ])],
     })
-    console.log(this.formulario);
   }
-
 }
