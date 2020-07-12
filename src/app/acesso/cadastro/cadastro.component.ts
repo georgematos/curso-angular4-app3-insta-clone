@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Usuario } from '../../model/usuario.model';
+import { Auth } from '../../auth.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -9,18 +10,19 @@ import { Usuario } from '../../model/usuario.model';
 })
 export class CadastroComponent implements OnInit {
 
-  public formulario: FormGroup = new FormGroup({
-    'email': new FormControl(null),
-    'nome_completo': new FormControl(null),
-    'nome_usuario': new FormControl(null),
-    'senha': new FormControl(null)
-  })
-
-  @Output()
-  public exibirPainel: EventEmitter<string> = new EventEmitter<string>();
-
-  constructor(
-    private fb: FormBuilder
+    public formulario: FormGroup = new FormGroup({
+      'email': new FormControl(null),
+      'nome_completo': new FormControl(null),
+      'nome_usuario': new FormControl(null),
+      'senha': new FormControl(null)
+    })
+    
+    @Output()
+    public exibirPainel: EventEmitter<string> = new EventEmitter<string>();
+    
+    constructor(
+      private fb: FormBuilder,
+      public auth: Auth
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class CadastroComponent implements OnInit {
       this.formulario.value.email,
       this.formulario.value.senha
     );
-    console.log(usuario);
+    this.auth.cadastrar(usuario);
   }
 
   private formValidationInit(): void {

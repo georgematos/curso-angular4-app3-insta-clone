@@ -9,6 +9,7 @@ import { BannerComponent } from './acesso/banner/banner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import { LoginComponent } from './acesso/login/login.component';
+import { Auth } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { LoginComponent } from './acesso/login/login.component';
     AppComponent,
     BannerComponent,
     CadastroComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     AppRoutingModule,
@@ -24,7 +25,9 @@ import { LoginComponent } from './acesso/login/login.component';
     BrowserModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    Auth
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
