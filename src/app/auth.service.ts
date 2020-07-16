@@ -2,8 +2,8 @@ import { Usuario } from './model/usuario.model';
 import * as firebase from 'firebase';
 
 export class Auth {
-    public cadastrar(usuario: Usuario): void {
-        firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
+    public cadastrar(usuario: Usuario): Promise<any> {
+        return firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
             .then((resp): any => {
                 // remover atributo senha do usuario
                 delete usuario.senha
@@ -13,7 +13,10 @@ export class Auth {
                 firebase.database().ref(`usuario_detalhe/${btoa(usuario.email)}`) 
                     .set(usuario);
             })
-            .catch((error: Error) => console.log(error));
+            .catch((error: Error) => { 
+                console.log(error);
+                alert("Ocorreu um erro ao cadastrar o usuário");
+            });
     }
 
     public autenticar(email: string, senha: string): void {

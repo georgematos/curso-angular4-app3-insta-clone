@@ -7,15 +7,15 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
+
   ngOnInit(): void {
 
     const firebaseConfig = {
-      
+    
     };
 
     firebase.initializeApp(firebaseConfig);
   }
-  
+
   title = 'app3';
 }
