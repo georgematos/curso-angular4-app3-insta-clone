@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Auth } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   public exibirPainel: EventEmitter<string> = new EventEmitter();
 
   constructor(
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    public auth: Auth
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   public autenticar(): void {
-    console.log(this.formulario.value.email,"\n",this.formulario.value.senha);
+    this.auth.autenticar(this.formulario.value.email, this.formulario.value.senha);
   }
 
 }
