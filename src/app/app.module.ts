@@ -11,6 +11,8 @@ import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import { LoginComponent } from './acesso/login/login.component';
 
 import { Auth } from './auth.service';
+import { HomeComponent } from './home/home.component';
+import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { Auth } from './auth.service';
     AppComponent,
     BannerComponent,
     CadastroComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    PublicacoesComponent
   ],
   imports: [
     AppRoutingModule,
