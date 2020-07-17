@@ -11,6 +11,7 @@ import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import { LoginComponent } from './acesso/login/login.component';
 
 import { Auth } from './auth.service';
+import { AuthGuard } from './auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 
@@ -31,7 +32,8 @@ import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
     ReactiveFormsModule
   ],
   providers: [
-    Auth
+    Auth,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
