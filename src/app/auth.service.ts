@@ -21,7 +21,13 @@ export class Auth {
 
     public autenticar(email: string, senha: string): void {
         firebase.auth().signInWithEmailAndPassword(email, senha)
-            .then((resp) => console.log(resp))
-            .catch((err) => console.log(err));
+            .then((resp) => {
+                console.log(resp);
+                console.log(firebase.auth().currentUser.getIdToken().then((resp: any) => console.log(resp)));
+            })
+            .catch((err) => {
+                console.log(err);
+                alert(err);
+            });
     }
 }
