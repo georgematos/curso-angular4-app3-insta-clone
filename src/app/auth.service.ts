@@ -2,7 +2,6 @@ import { Usuario } from './model/usuario.model';
 import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 
 @Injectable()
 export class Auth {
@@ -36,12 +35,13 @@ export class Auth {
                 firebase.auth().currentUser.getIdToken()
                     .then((idToken: string) => {
                         this.token_id = idToken;
-                        this.router.navigate(['/home'])
+                            this.router.navigate(['/home']);
                     });
             })
-            .catch((err) => {
-                console.log(err);
-                alert(err);
-            });
+            .catch((err) => { alert(err) });
+    }
+
+    public autenticado(): boolean {
+        return this.token_id !== undefined;       
     }
 }
