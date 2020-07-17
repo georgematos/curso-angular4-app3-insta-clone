@@ -2,6 +2,9 @@ import { Usuario } from './model/usuario.model';
 import * as firebase from 'firebase';
 
 export class Auth {
+
+    private token_id: string;
+
     public cadastrar(usuario: Usuario): Promise<any> {
         return firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
             .then((resp): any => {
@@ -21,9 +24,10 @@ export class Auth {
 
     public autenticar(email: string, senha: string): void {
         firebase.auth().signInWithEmailAndPassword(email, senha)
-            .then((resp) => {
-                console.log(resp);
-                console.log(firebase.auth().currentUser.getIdToken().then((resp: any) => console.log(resp)));
+            .then(() => {
+                firebase.auth().currentUser.getIdToken()
+                    .then((idToken: string) => this.token_id = idToken);
+                console.log(this.token_id);
             })
             .catch((err) => {
                 console.log(err);
