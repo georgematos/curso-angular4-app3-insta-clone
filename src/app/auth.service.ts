@@ -2,6 +2,8 @@ import { Usuario } from './model/usuario.model';
 import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BrowserStack } from 'protractor/built/driverProviders';
+import { exit } from 'process';
 
 @Injectable()
 export class Auth {
@@ -48,14 +50,15 @@ export class Auth {
             this.token_id = localStorage.getItem('idToken');
         }
 
+        this.token_id === undefined ? this.router.navigate(['/']) : exit;
+
         return this.token_id !== undefined;
     }
 
     public logout(): void {
-        firebase.auth().signOut().then(() => {
-            localStorage.removeItem('idToken')
-            this.token_id = undefined;
-            // this.router.navigate(['/']); se eu quisesse navegar para a raiz do app, no meu caso não precisei.
-        });
+        firebase.auth().signOut();
+        localStorage.removeItem('idToken')
+        this.token_id = undefined;
+        // this.router.navigate(['/']); se eu quisesse navegar para a raiz do app, no meu caso não precisei.
     }
 }
