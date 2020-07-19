@@ -50,4 +50,12 @@ export class Auth {
 
         return this.token_id !== undefined;
     }
+
+    public logout(): void {
+        firebase.auth().signOut().then(() => {
+            localStorage.removeItem('idToken')
+            this.token_id = undefined;
+            // this.router.navigate(['/']); se eu quisesse navegar para a raiz do app, no meu caso não precisei.
+        });
+    }
 }
