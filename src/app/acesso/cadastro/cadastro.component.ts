@@ -2,16 +2,20 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Auth } from '../../auth.service';
 import { Usuario } from '../../model/usuario.model';
-import { trigger, state, style, transition, keyframes } from '@angular/animations';
+import { Animations } from '../animations';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.css']
+  styleUrls: ['./cadastro.component.css'],
+  animations: [
+    Animations["animation-shake-error"]
+  ]
 })
 export class CadastroComponent implements OnInit {
 
   public signUpError: string;
+  public statusError: boolean = false;
 
     public formulario = this.fb.group({
       nome_usuario: ['', Validators.compose([
@@ -49,17 +53,21 @@ export class CadastroComponent implements OnInit {
   }
 
   public cadastrarUsuario(): void {
+    this.statusError = false;
     let usuario: Usuario = new Usuario(
       this.formulario.value.nome_usuario,
       this.formulario.value.nome_completo,
       this.formulario.value.email,
       this.formulario.value.senha
     );
-    this.auth.cadastrar(usuario).then(
-      () => this.auth.signUpError === undefined ? 
-        this.exibirPainelDeLogin() : 
-        this.signUpError = this.auth.signUpError
-    )
+    this.auth.cadastrar(usuario).then(() => {
+        if (this.auth.signUpError === undefined) {
+          this.exibirPainelDeLogin();
+        } else {
+          this.signUpError = this.auth.signUpError;
+          this.statusError = true;
+        }
+    })
   }
 
 }
