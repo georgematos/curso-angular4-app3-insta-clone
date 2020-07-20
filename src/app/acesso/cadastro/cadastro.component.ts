@@ -67,7 +67,7 @@ export class CadastroComponent implements OnInit {
           this.signUpError = this.auth.signUpError;
           this.statusError = true;
         }
-    })
+    }).catch();
   }
 
 }

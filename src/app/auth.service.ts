@@ -28,7 +28,8 @@ export class Auth {
             })
             .catch((error: Error) => {
                 console.log(error);
-                this.signUpError = JSON.parse(error.message).error.message;
+                this.signUpError = error.message;
+                console.log("kkk");
             });
     }
 
