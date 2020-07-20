@@ -2,13 +2,13 @@ import { Usuario } from './model/usuario.model';
 import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BrowserStack } from 'protractor/built/driverProviders';
 import { exit } from 'process';
 
 @Injectable()
 export class Auth {
 
     private token_id: string;
+    public authError: string;
 
     constructor(
         private router: Router
@@ -31,17 +31,19 @@ export class Auth {
             });
     }
 
-    public autenticar(email: string, senha: string): void {
-        firebase.auth().signInWithEmailAndPassword(email, senha)
-            .then(() => {
-                firebase.auth().currentUser.getIdToken()
-                    .then((idToken: string) => {
-                        this.token_id = idToken;
-                        localStorage.setItem('idToken', idToken);
-                        this.router.navigate(['/home']);
-                    });
-            })
-            .catch((err) => { alert(err) });
+    public async autenticar(email: string, senha: string): Promise<any> {
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, senha);
+            firebase.auth().currentUser.getIdToken()
+                .then((idToken: string) => {
+                    this.token_id = idToken;
+                    localStorage.setItem('idToken', idToken);
+                    this.router.navigate(['/home']);
+                });
+        }
+        catch (err) {
+            this.authError = err;
+        }
     }
 
     public autenticado(): boolean {

@@ -9,6 +9,8 @@ import { Auth } from 'src/app/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  public errorMsg: string;
+
   public formulario = this.fb.group({
     'email': ['', Validators.compose([
       Validators.required,
@@ -36,7 +38,12 @@ export class LoginComponent implements OnInit {
   }
 
   public autenticar(): void {
-    this.auth.autenticar(this.formulario.value.email, this.formulario.value.senha);
+    this.auth.autenticar(this.formulario.value.email, this.formulario.value.senha)
+      .then(() => {
+        if(this.auth.authError !== undefined) {
+          this.errorMsg = this.auth.authError;
+        }
+      });
   }
 
 }
