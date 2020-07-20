@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Auth } from '../../auth.service';
 import { Usuario } from '../../model/usuario.model';
+import { trigger, state, style, transition, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-cadastro',
