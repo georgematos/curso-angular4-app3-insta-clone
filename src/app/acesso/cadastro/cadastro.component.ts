@@ -55,13 +55,9 @@ export class CadastroComponent implements OnInit {
       this.formulario.value.senha
     );
     this.auth.cadastrar(usuario).then(
-      () => {
-        if (this.auth.signUpError === undefined) {
-          this.exibirPainelDeLogin();
-        } else {
-          this.signUpError = this.auth.signUpError;
-        }
-      }
+      () => this.auth.signUpError === undefined ? 
+        this.exibirPainelDeLogin() : 
+        this.signUpError = this.auth.signUpError
     )
   }
 
