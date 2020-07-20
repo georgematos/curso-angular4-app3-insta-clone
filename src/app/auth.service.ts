@@ -9,6 +9,7 @@ export class Auth {
 
     private token_id: string;
     public authError: string;
+    public signUpError: string;
 
     constructor(
         private router: Router
@@ -27,7 +28,7 @@ export class Auth {
             })
             .catch((error: Error) => {
                 console.log(error);
-                alert("Ocorreu um erro ao cadastrar o usuário");
+                this.signUpError = JSON.parse(error.message).error.message;
             });
     }
 
@@ -41,8 +42,8 @@ export class Auth {
                     this.router.navigate(['/home']);
                 });
         }
-        catch (err) {
-            this.authError = err;
+        catch (error) {
+            this.authError = error;
         }
     }
 

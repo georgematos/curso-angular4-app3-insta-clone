@@ -10,6 +10,8 @@ import { Usuario } from '../../model/usuario.model';
 })
 export class CadastroComponent implements OnInit {
 
+  public signUpError: string;
+
     public formulario = this.fb.group({
       nome_usuario: ['', Validators.compose([
         Validators.required,
@@ -53,8 +55,14 @@ export class CadastroComponent implements OnInit {
       this.formulario.value.senha
     );
     this.auth.cadastrar(usuario).then(
-      () => this.exibirPainelDeLogin()
-    );
+      () => {
+        if (this.auth.signUpError === undefined) {
+          this.exibirPainelDeLogin();
+        } else {
+          this.signUpError = this.auth.signUpError;
+        }
+      }
+    )
   }
 
 }
