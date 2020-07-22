@@ -12,6 +12,7 @@ import { LoginComponent } from './acesso/login/login.component';
 
 import { Auth } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
+import { DataBase } from './database.service';
 import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
@@ -35,7 +36,8 @@ import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-pu
   ],
   providers: [
     Auth,
-    AuthGuard
+    AuthGuard,
+    DataBase,
   ],
   bootstrap: [AppComponent]
 })

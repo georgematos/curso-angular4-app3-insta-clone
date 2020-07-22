@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DataBase } from 'src/app/database.service';
 
 @Component({
   selector: 'app-incluir-publicacao',
@@ -12,7 +13,10 @@ export class IncluirPublicacaoComponent implements OnInit {
     'titulo': [''],
   })
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private dataBase: DataBase
+  ) { }
 
   ngOnInit(): void {
 
@@ -20,6 +24,7 @@ export class IncluirPublicacaoComponent implements OnInit {
 
   public publicar(): void {
     console.log(this.formulario.value.titulo);
+    this.dataBase.publicar();
   }
 
 }
