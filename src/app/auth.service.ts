@@ -15,22 +15,26 @@ export class Auth {
         private router: Router
     ) { }
 
-    public cadastrar(usuario: Usuario): Promise<any> {
-        return firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
-            .then((resp): any => {
-                // remover atributo senha do usuario
-                delete usuario.senha
+    public async cadastrar(usuario: Usuario): Promise<any> {
+        try {
+            await firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
+                .then((resp): any => {
+                    // remover atributo senha do usuario
+                    delete usuario.senha
 
-                // registrando dados complementares do usuario no path email na base 64
-                // btoa: funcao nativa js que converte uma string para base 64 atob faz o contrário
-                firebase.database().ref(`usuario_detalhe/${btoa(usuario.email)}`)
-                    .set(usuario);
-            })
-            .catch((error: Error) => {
-                console.log(error);
-                this.signUpError = error.message;
-                console.log("kkk");
-            });
+                    // registrando dados complementares do usuario no path email na base 64
+                    // btoa: funcao nativa js que converte uma string para base 64 atob faz o contrário
+                    firebase.database().ref(`usuario_detalhe/${btoa(usuario.email)}`)
+                        .set(usuario);
+                })
+
+        } catch (error) {
+            console.log(error);
+            this.signUpError = error.message;
+            console.log("kkk");
+        }
+
+
     }
 
     public async autenticar(email: string, senha: string): Promise<any> {
