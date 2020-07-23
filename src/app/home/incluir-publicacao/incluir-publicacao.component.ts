@@ -11,6 +11,7 @@ import * as firebase from 'firebase';
 export class IncluirPublicacaoComponent implements OnInit {
 
   private email: string;
+  private image: any;
 
   public formulario: FormGroup = this.fb.group({
     'titulo': [''],
@@ -35,4 +36,7 @@ export class IncluirPublicacaoComponent implements OnInit {
     });
   }
 
+  public prepareUploadImage(event: Event): void {
+    console.log((<HTMLInputElement>event.target).files);
+  }
 }
