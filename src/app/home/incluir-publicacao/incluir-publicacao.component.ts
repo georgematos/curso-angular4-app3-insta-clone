@@ -33,10 +33,11 @@ export class IncluirPublicacaoComponent implements OnInit {
     this.dataBase.publicar({
       email: this.email,
       titulo: this.formulario.value.titulo,
+      imagem: this.image[0]
     });
   }
 
   public prepareUploadImage(event: Event): void {
-    console.log((<HTMLInputElement>event.target).files);
+    this.image = ((<HTMLInputElement>event.target).files);
   }
 }
