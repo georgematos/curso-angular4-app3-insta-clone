@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataBase } from 'src/app/database.service';
 import * as firebase from 'firebase';
+import { Progresso } from 'src/app/progresso.service';
 
 @Component({
   selector: 'app-incluir-publicacao',
@@ -19,7 +20,8 @@ export class IncluirPublicacaoComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dataBase: DataBase
+    private dataBase: DataBase,
+    private progresso: Progresso
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,8 @@ export class IncluirPublicacaoComponent implements OnInit {
       titulo: this.formulario.value.titulo,
       imagem: this.image[0]
     });
+    console.log(this.progresso.status)
+    console.log(this.progresso.status)
   }
 
   public prepareUploadImage(event: Event): void {

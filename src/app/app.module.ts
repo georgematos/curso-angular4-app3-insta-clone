@@ -16,6 +16,7 @@ import { DataBase } from './database.service';
 import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
+import { Progresso } from './progresso.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-pu
     Auth,
     AuthGuard,
     DataBase,
+    Progresso
   ],
   bootstrap: [AppComponent]
 })
