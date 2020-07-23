@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     const firebaseConfig = {
-  
+
     };
 
     firebase.initializeApp(firebaseConfig);
