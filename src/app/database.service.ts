@@ -25,7 +25,7 @@ export class DataBase {
                 (snapshot: any) => {
                     this.progresso.status = 'andamento';
                     this.progresso.estado = snapshot;
-                    console.log('spashot capturado', snapshot);
+                    // console.log('spashot capturado', snapshot);
                 },
                 (error) => {
                     this.progresso.status = 'erro';

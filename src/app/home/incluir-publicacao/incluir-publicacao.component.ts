@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { DataBase } from 'src/app/database.service';
 import * as firebase from 'firebase';
+import { interval, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DataBase } from 'src/app/database.service';
 import { Progresso } from 'src/app/progresso.service';
 
 @Component({
@@ -37,8 +39,22 @@ export class IncluirPublicacaoComponent implements OnInit {
       titulo: this.formulario.value.titulo,
       imagem: this.image[0]
     });
-    console.log(this.progresso.status)
-    console.log(this.progresso.status)
+
+    let intervalo = interval(1500);
+
+    let continua = new Subject();
+    continua.next(true);
+
+    intervalo
+    .pipe(takeUntil(continua))
+    .subscribe(() => {
+      console.log(this.progresso.status)
+      console.log(this.progresso.status)
+      if(this.progresso.status === 'concluido') {
+        continua.next(false);
+      }
+    })
+
   }
 
   public prepareUploadImage(event: Event): void {
