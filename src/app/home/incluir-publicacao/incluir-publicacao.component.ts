@@ -16,6 +16,9 @@ export class IncluirPublicacaoComponent implements OnInit {
   private email: string;
   private image: any;
 
+  public statusPublicacao: string = 'pendente';
+  public porcentagemUpload: number;
+
   public formulario: FormGroup = this.fb.group({
     'titulo': [''],
   })
@@ -33,24 +36,28 @@ export class IncluirPublicacaoComponent implements OnInit {
   }
 
   public publicar(): void {
-    console.log();
     this.dataBase.publicar({
       email: this.email,
       titulo: this.formulario.value.titulo,
       imagem: this.image[0]
     });
 
-    let intervalo = interval(1500);
+    let progressoUpload = interval(500);
 
     let continua = new Subject();
     continua.next(true);
 
-    intervalo
+    progressoUpload
     .pipe(takeUntil(continua))
     .subscribe(() => {
       console.log(this.progresso.status)
-      console.log(this.progresso.status)
+      console.log(this.progresso.progrecaoUpload)
+      this.statusPublicacao = 'andamento';
+
+      this.porcentagemUpload = Math.round((this.progresso.progrecaoUpload.bytesTransferred / this.progresso.progrecaoUpload.totalBytes) * 100);
+
       if(this.progresso.status === 'concluido') {
+        this.statusPublicacao = 'concluido';
         continua.next(false);
       }
     })

@@ -24,17 +24,14 @@ export class DataBase {
                 // acompanhamento do progresso do upload
                 (snapshot: any) => {
                     this.progresso.status = 'andamento';
-                    this.progresso.estado = snapshot;
-                    // console.log('spashot capturado', snapshot);
+                    this.progresso.progrecaoUpload = snapshot;
                 },
                 (error) => {
                     this.progresso.status = 'erro';
-                    // console.log(error);
                 },
                 // finalização do processo
                 () => {
                     this.progresso.status = 'concluido'
-                    // console.log("upload completo");
                 }
             )
 
