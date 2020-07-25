@@ -1,7 +1,7 @@
 export class Publicacao {
 
     constructor(
-    public descricao: string,
+    public titulo: string,
     public url_imagem: string
     ){}
 }

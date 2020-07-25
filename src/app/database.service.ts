@@ -37,10 +37,21 @@ export class DataBase {
     }
 
     public obterPublicacoes(email: string): any {
+        let publicacoes: Array<Publicacao> = [];
         firebase.database().ref(`publicacoes/${btoa(email)}`)
             .once('value')
             .then((snapshot: any) => {
-                console.log(snapshot.val());
+                snapshot.forEach((childOf: any) => {
+                    firebase.storage().ref()
+                        .child(`imagens/${childOf.key}`)
+                        .getDownloadURL()
+                        .then((url: string) => {
+                            publicacoes.push(new Publicacao(childOf.val().titulo, url));
+                        })
+                });
+            })
+            .finally(() => {
+                console.log(publicacoes);
             })
     }
 }
