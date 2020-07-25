@@ -42,7 +42,7 @@ export class IncluirPublicacaoComponent implements OnInit {
       imagem: this.image[0]
     });
 
-    let progressoUpload = interval(500);
+    let progressoUpload = interval(1500);
 
     let continua = new Subject();
     continua.next(true);
@@ -50,8 +50,6 @@ export class IncluirPublicacaoComponent implements OnInit {
     progressoUpload
     .pipe(takeUntil(continua))
     .subscribe(() => {
-      console.log(this.progresso.status)
-      console.log(this.progresso.progrecaoUpload)
       this.statusPublicacao = 'andamento';
 
       this.porcentagemUpload = Math.round((this.progresso.progrecaoUpload.bytesTransferred / this.progresso.progrecaoUpload.totalBytes) * 100);
