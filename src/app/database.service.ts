@@ -45,8 +45,16 @@ export class DataBase {
                     firebase.storage().ref()
                         .child(`imagens/${childOf.key}`)
                         .getDownloadURL()
-                        .then((url: string) => {
-                            publicacoes.push(new Publicacao(childOf.val().titulo, url));
+                        .then((url_imagem: string) => {
+                            let publicacao = new Publicacao();
+                            publicacao.url_imagem = url_imagem;
+                            publicacao.titulo = childOf.val().titulo;
+                            firebase.database().ref(`usuario_detalhe/${btoa(email)}`)
+                            .once('value')
+                            .then((snapshot: any) => {
+                                publicacao.nome_usuario = snapshot.val().userName;
+                            })
+                            publicacoes.push(publicacao);
                         })
                 });
             })
