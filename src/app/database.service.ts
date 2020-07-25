@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { Progresso } from './progresso.service';
+import { Publicacao } from './model/publicacao.model';
 
 @Injectable()
 export class DataBase {
@@ -33,5 +34,13 @@ export class DataBase {
                         }
                     )
             });
+    }
+
+    public obterPublicacoes(email: string): any {
+        firebase.database().ref(`publicacoes/${btoa(email)}`)
+            .once('value')
+            .then((snapshot: any) => {
+                console.log(snapshot.val());
+            })
     }
 }

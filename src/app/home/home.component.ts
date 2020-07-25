@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '../auth.service';
+import { Publicacao } from '../model/publicacao.model'
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,10 @@ import { Auth } from '../auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  public publicacoes: Array<Publicacao>;
+
   constructor(
-    private auth: Auth
+    private auth: Auth,
   ) { }
 
   ngOnInit(): void {

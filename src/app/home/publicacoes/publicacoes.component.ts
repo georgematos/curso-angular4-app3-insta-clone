@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataBase } from 'src/app/database.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-publicacoes',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublicacoesComponent implements OnInit {
 
-  constructor() { }
+  private email: string;
+
+  constructor(
+    private bd: DataBase
+  ) { }
 
   ngOnInit(): void {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.email = user.email;
+      this.atualizarTimeLine();
+    })
   }
 
+  public atualizarTimeLine() {
+    this.bd.obterPublicacoes(this.email);
+  }
 }
