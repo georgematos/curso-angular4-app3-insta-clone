@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataBase } from 'src/app/database.service';
 import * as firebase from 'firebase';
+import { DataBase } from 'src/app/database.service';
+import { Publicacao } from 'src/app/model/publicacao.model';
 
 @Component({
   selector: 'app-publicacoes',
@@ -9,7 +10,8 @@ import * as firebase from 'firebase';
 })
 export class PublicacoesComponent implements OnInit {
 
-  private email: string;
+  private email_usuario: string;
+  public publicacoes: Array<Publicacao>;
 
   constructor(
     private bd: DataBase
@@ -17,12 +19,16 @@ export class PublicacoesComponent implements OnInit {
 
   ngOnInit(): void {
     firebase.auth().onAuthStateChanged((user) => {
-      this.email = user.email;
+      this.email_usuario = user.email;
       this.atualizarTimeLine();
     })
   }
 
   public atualizarTimeLine() {
-    this.bd.obterPublicacoes(this.email);
+    this.bd.obterPublicacoes(this.email_usuario)
+      .then((publicacoes: any) => {
+        this.publicacoes = publicacoes;
+        console.log(this.publicacoes);
+      });
   }
 }
