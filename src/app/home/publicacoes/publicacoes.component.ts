@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { DataBase } from 'src/app/database.service';
 import { Publicacao } from 'src/app/model/publicacao.model';
@@ -28,7 +28,6 @@ export class PublicacoesComponent implements OnInit {
     this.bd.obterPublicacoes(this.email_usuario)
       .then((publicacoes: any) => {
         this.publicacoes = publicacoes;
-        console.log(this.publicacoes);
       });
   }
 }

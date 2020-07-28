@@ -20,7 +20,7 @@ export class IncluirPublicacaoComponent implements OnInit {
   public porcentagemUpload: number;
 
   @Output()
-  public eeToParentAtualizarPublicacao: EventEmitter<any> = new EventEmitter();
+  public eeToHomeAtualizarPublicacao: EventEmitter<any> = new EventEmitter();
 
   public formulario: FormGroup = this.fb.group({
     'titulo': ['', Validators.required]
@@ -59,8 +59,8 @@ export class IncluirPublicacaoComponent implements OnInit {
 
       if(this.progresso.status === 'concluido') {
         this.statusPublicacao = 'concluido';
+        this.eeToHomeAtualizarPublicacao.emit();
         continua.next(false);
-        this.eeToParentAtualizarPublicacao.emit();
       }
     })
 

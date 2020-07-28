@@ -31,7 +31,6 @@ export class Auth {
         } catch (error) {
             console.log(error);
             this.signUpError = error.message;
-            console.log("kkk");
         }
 
 
