@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase';
 import { interval, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -19,8 +19,11 @@ export class IncluirPublicacaoComponent implements OnInit {
   public statusPublicacao: string = 'pendente';
   public porcentagemUpload: number;
 
+  @Output()
+  public eeToParentAtualizarPublicacao: EventEmitter<any> = new EventEmitter();
+
   public formulario: FormGroup = this.fb.group({
-    'titulo': [''],
+    'titulo': ['', Validators.required]
   })
 
   constructor(
@@ -57,6 +60,7 @@ export class IncluirPublicacaoComponent implements OnInit {
       if(this.progresso.status === 'concluido') {
         this.statusPublicacao = 'concluido';
         continua.next(false);
+        this.eeToParentAtualizarPublicacao.emit();
       }
     })
 
