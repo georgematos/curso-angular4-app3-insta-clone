@@ -41,31 +41,39 @@ export class DataBase {
         return new Promise((resolve, reject) => {
 
             let publicacoes: Array<Publicacao> = [];
-
+            
             firebase.database().ref(`publicacoes/${btoa(email)}`)
-                .orderByKey()
-                .once('value')
-                .then((snapshot: any) => {
+            .orderByKey()
+            .once('value')
+            .then((snapshot: any) => {
                     snapshot.forEach((childOf: any) => {
+                        let publicacao = childOf.val();
+                        publicacao.key = childOf.key;
+                        publicacoes.push(publicacao);
+                    })
+
+                    return publicacoes.reverse();
+                }).then((publicacoes: any) => {
+                    publicacoes.forEach((pub: any) => {
                         firebase.storage().ref()
-                            .child(`imagens/${childOf.key}`)
+                            .child(`imagens/${pub.key}`)
                             .getDownloadURL()
                             .then((url_imagem: string) => {
-                                let publicacao = new Publicacao();
-                                publicacao.url_imagem = url_imagem;
-                                publicacao.titulo = childOf.val().titulo;
+                                pub.url_imagem = url_imagem;
+                                pub.titulo = pub.titulo;
                                 firebase.database().ref(`usuario_detalhe/${btoa(email)}`)
                                     .once('value')
                                     .then((snapshot: any) => {
-                                        publicacao.nome_usuario = snapshot.val().userName;
+                                        pub.nome_usuario = snapshot.val().userName;
                                     })
-                                publicacoes.push(publicacao);
                             })
-                        });
-                    })    
-                .finally(() => {
-                    resolve(publicacoes.reverse());
+                    })
+                    
                 })
+                .finally(() => {
+                    resolve(publicacoes);
+                });
         })
     }
+
 }
