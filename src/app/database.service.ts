@@ -43,6 +43,7 @@ export class DataBase {
             let publicacoes: Array<Publicacao> = [];
 
             firebase.database().ref(`publicacoes/${btoa(email)}`)
+                .orderByKey()
                 .once('value')
                 .then((snapshot: any) => {
                     snapshot.forEach((childOf: any) => {
@@ -61,9 +62,9 @@ export class DataBase {
                                 publicacoes.push(publicacao);
                             })
                         });
-                    })
+                    })    
                 .finally(() => {
-                    resolve(publicacoes);
+                    resolve(publicacoes.reverse());
                 })
         })
     }
